@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\MainController as AdminMainController;
 
+
+//importo controller
+use App\Http\Controllers\Admin\ProjectController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +22,10 @@ use App\Http\Controllers\Admin\MainController as AdminMainController;
 |
 */
 
+// php artisan route:list        mostra tutte le rotte definite
+
 Route::get('/', [MainController::class, 'index'])->name('home');
+
 
 Route::prefix('admin')
     ->name('admin.')
@@ -25,7 +33,10 @@ Route::prefix('admin')
     ->group(function () {
 
     Route::get('/dashboard', [AdminMainController::class, 'dashboard'])->name('dashboard');
-
+    
+    //definisco tutte le 7 rotte
+    Route::resource('project', ProjectController::class);
+    // php artisan route:list        mostra tutte le rotte definite
 });
 
 require __DIR__.'/auth.php';
